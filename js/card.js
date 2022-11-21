@@ -71,6 +71,4 @@ const createCardElement = ({author, offer}) => {
 mapCanvas.appendChild(createCardElement(similarOffer[0]));
 
 // Подключите модуль в проект.
-export {
-  createCardElement,
-};
+export {createCardElement};
