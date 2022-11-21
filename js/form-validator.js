@@ -70,8 +70,8 @@ capacityField.addEventListener('change', onCapacityChange);
 // Например, если время заезда указано «после 14», то время выезда
 // будет равно «до 14» и наоборот.
 
-const checkinTime = adForm.querySelector('[name="timein"]');
-const checkoutTime = adForm.querySelector('[name="timeout"]');
+const checkinTime = adForm.querySelector('#timein');
+const checkoutTime = adForm.querySelector('#timeout');
 
 const onCheckinChange = () => {
   checkoutTime.value = checkinTime.value;
