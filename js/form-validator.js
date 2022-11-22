@@ -12,6 +12,7 @@ const pristine = new Pristine(adForm, {
 // Поле «Тип жилья» влияет на минимальное значение поля «Цена за ночь»:
 
 const priceField = adForm.querySelector('#price');
+
 const minPriceHouse = {
   'bungalow': 0,
   'flat' : 1000,
@@ -41,6 +42,51 @@ const onTypeChange = () => {
 };
 
 adForm.querySelector('#type').addEventListener('change', onTypeChange);
+
+// А ещё мы добавим альтернативную возможность указать цену за ночь:
+// С помощью библиотеки noUiSlider (/vendor/nouislider) реализуйте указание цены за ночь.
+const sliderElement = document.querySelector('.ad-form__slider');
+const adFormType = document.querySelector('#type');
+
+const sliderElementConfig = {
+  min: 0,
+  max: 100000,
+  start : priceField.placeholder,
+  step: 1,
+};
+
+//код из примера
+noUiSlider.create(sliderElement, {
+  range : {
+    min : sliderElementConfig.min,
+    max : sliderElementConfig.max,
+  },
+  start : sliderElementConfig.start,
+  step: sliderElementConfig.step,
+  connect: 'lower',
+  format: {
+    to: function (value) {
+      if (Number.isInteger(value)) {
+        return value.toFixed(0);
+      }
+    },
+    from: function (value) {
+      return parseFloat(value);
+    },
+  }
+});
+
+sliderElement.noUiSlider.on('update', () => {
+  priceField.value = sliderElement.noUiSlider.get();
+});
+
+adFormType.addEventListener('change', ()=> {
+  onTypeChange();
+  sliderElement.noUiSlider.set(priceField.placeholder);
+});
+
+priceField.addEventListener('change', onTypeChange);
+
 
 // Поле «Количество комнат» синхронизировано с полем «Количество мест» таким образом, что при выборе количества комнат вводятся ограничения на допустимые варианты выбора количества гостей:
 
