@@ -1,4 +1,6 @@
 import {sendData} from './api.js';
+import {DEFAULT_AVATAR, previewPhoto, previewAvatar } from './pictures.js';
+import {resetMainMark} from './map.js';
 
 const adForm = document.querySelector('.ad-form');
 
@@ -151,6 +153,19 @@ const unblockSubmitButton = () => {
   submitBtn.disabled = false;
   submitBtn.textContent = 'Сохранить';
 };
+
+const resetBtn = adForm.querySelector('.ad-form__reset');
+const resetForm = () => {
+  pristine.reset();
+  adForm.reset();
+  resetMainMark();
+  previewPhoto.innerHTML = '';
+  previewAvatar.src = DEFAULT_AVATAR;
+  priceField.placeholder = minPriceHouse[adFormType.value];
+  sliderElement.noUiSlider.set(minPriceHouse[adFormType.value]);
+};
+
+resetBtn.addEventListener('click', resetForm);
 
 const setUserFormSubmit = (onSuccess, onFail) => {
   adForm.addEventListener('submit', (evt) => {

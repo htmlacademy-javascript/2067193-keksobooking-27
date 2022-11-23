@@ -1,10 +1,10 @@
 import './form-validator';
 import './data.js';
 
-
 const adForm = document.querySelector('.ad-form');
 const fieldset = adForm.querySelectorAll('fieldset');
 const adress = adForm.querySelector('#address');
+const NUMBER_POINT = 5;
 
 const deactivatePage = () => {
   adForm.classList.add('ad-form--disabled');
@@ -43,10 +43,8 @@ const activateMapFilters = () => {
 activatePage();
 activateMapFilters();
 
-const NUMBER_POINT = 5;
-
-const setAdress = (coordinates) => {
+const setAddress = (coordinates) => {
   adress.value = `${coordinates.lat.toFixed(NUMBER_POINT)}, ${coordinates.lng.toFixed(NUMBER_POINT)}`;
 };
 
-export {deactivatePage, deactivateMapFilters, activatePage, activateMapFilters, setAdress};
+export {deactivatePage, deactivateMapFilters, activatePage, activateMapFilters, setAddress};
