@@ -74,7 +74,7 @@ const createCardElement = ({author, offer}) => {
   renderPhotos(offer.photos, photo);
 
   fragment.appendChild(cardElement);
-  return fragment;
+  return cardElement;
 };
 
 export {createCardElement};

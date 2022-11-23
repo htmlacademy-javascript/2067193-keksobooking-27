@@ -1,4 +1,5 @@
 import {isEscEvent} from './util.js';
+import {resetFilter} from './filters.js';
 
 const showAlert = (message) => {
 
@@ -33,6 +34,7 @@ const showSuccess = () => {
 
   document.body.appendChild(successPopup);
   document.querySelector('.ad-form').reset();
+  resetFilter();
 
   document.addEventListener('keydown', (evt) => {
     if (isEscEvent(evt)) {
