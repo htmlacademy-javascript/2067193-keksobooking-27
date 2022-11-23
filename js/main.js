@@ -1,11 +1,24 @@
 import {similarOffer} from './data.js';
-import {createCardElement} from './card.js';
-import {deactivatePage, deactivateMapFilters, activatePage, activateMapFilters} from './form.js';
-import './form.js';
+// import {createCardElement} from './card.js';
+import {deactivatePage, deactivateMapFilters, activatePage, activateMapFilters, setAdress} from './form.js';
+import {initMap, setOnMapLoad, setOnMainPinMove, setAdPins} from './map.js';
 
-similarOffer();
-createCardElement();
+
+const startCoordinate = {
+  lat: 35.66023,
+  lng: 139.73007,
+};
+
+const offers = similarOffer;
+
+setOnMapLoad(()=> {
+  setOnMainPinMove(setAdress);
+  setAdress(startCoordinate);
+  activatePage();
+  activateMapFilters();
+  setAdPins(offers);
+});
+
 deactivatePage();
 deactivateMapFilters();
-activatePage();
-activateMapFilters();
+initMap(startCoordinate);

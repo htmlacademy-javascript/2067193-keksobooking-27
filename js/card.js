@@ -1,9 +1,10 @@
 // Заведите модуль, который будет отвечать за генерацию разметки похожих элементов.
 // На основе временных данных для разработки и шаблона #card создайте DOM-элементы, соответствующие объявлениям, и заполните их данными:
 
-import {similarOffer} from './data.js';
+// import {similarOffer} from './data.js';
 // Отрисуйте один из сгенерированных DOM-элементов, например первый, в блок #map-canvas, чтобы проверить, что данные в разметку были вставлены корректно.
-const mapCanvas = document.querySelector('.map__canvas');
+// 9. Удалите код отрисовки одного из сгенерированных DOM-элементов объявления, который был нужен только для разработки.
+// const mapCanvas = document.querySelector('.map__canvas');
 
 const template = document.querySelector('#card').content;
 const popup = template.querySelector('.popup');
@@ -68,7 +69,7 @@ const createCardElement = ({author, offer}) => {
   return fragment;
 };
 
-mapCanvas.appendChild(createCardElement(similarOffer[0]));
+// mapCanvas.appendChild(createCardElement(similarOffer[0]));
 
 // Подключите модуль в проект.
 export {createCardElement};

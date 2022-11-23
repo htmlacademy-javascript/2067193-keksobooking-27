@@ -1,13 +1,16 @@
+/* eslint-disable no-undef */
 // Заведите модуль, который будет отвечать за работу с формой.
 
 // Реализуйте с помощью JavaScript (удобнее функцией!) перевод страницы в неактивное состояние. Все пункты, кроме первого про карту.
 // Важно. Неактивность должна добавляться именно средствами JavaScript, иначе, если классы и атрибуты добавить напрямую в HTML, при ошибке в скриптах или ошибке загрузки скриптов сайт будет недоступен пользователю.
 
 import './form-validator';
+import './data.js';
 
 
 const adForm = document.querySelector('.ad-form');
 const fieldset = adForm.querySelectorAll('fieldset');
+const adress = adForm.querySelector('#address');
 
 // 1.1. Неактивное состояние. При открытии страница находится в неактивном состоянии:
 const deactivatePage = () => {
@@ -43,7 +46,7 @@ deactivateMapFilters();
 const activatePage = () => {
   // Форма заполнения информации об объявлении .ad-form содержит класс ad-form--disabled;
   adForm.classList.remove('ad-form--disabled');
-  // Все интерактивные элементы формы .ad-form должны быть заблокированы с помощью атрибута disabled, добавленного на них или на их родительские блоки fieldset. Слайдер также должен быть заблокирован ???? какой слайдер))));
+  // Все интерактивные элементы формы .ad-form должны быть заблокированы с помощью атрибута disabled, добавленного на них или на их родительские блоки fieldset. Слайдер также должен быть заблокирован
   fieldset.forEach((element) => {
     element.disabled = false;
   });
@@ -59,4 +62,10 @@ const activateMapFilters = () => {
 activatePage();
 activateMapFilters();
 
-export {deactivatePage, deactivateMapFilters, activatePage, activateMapFilters};
+const numberPoint = 5;
+
+const setAdress = (coordinates) => {
+  adress.value = `${coordinates.lat.toFixed(numberPoint)}, ${coordinates.lng.toFixed(numberPoint)}`;
+};
+
+export {deactivatePage, deactivateMapFilters, activatePage, activateMapFilters, setAdress};
