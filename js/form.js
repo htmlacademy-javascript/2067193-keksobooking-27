@@ -1,5 +1,4 @@
-import './form-validator';
-import './data.js';
+import './form-validator.js';
 
 const adForm = document.querySelector('.ad-form');
 const fieldset = adForm.querySelectorAll('fieldset');

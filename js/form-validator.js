@@ -1,25 +1,38 @@
 import {sendData} from './api.js';
-import {DEFAULT_AVATAR, previewPhoto, previewAvatar } from './pictures.js';
+import {DEFAULT_AVATAR, previewPhoto, previewAvatar} from './pictures.js';
 import {resetMainMark} from './map.js';
+import {resetFilter} from './filters.js';
 
 const adForm = document.querySelector('.ad-form');
+const submitBtn = adForm.querySelector('.ad-form__submit');
+const adFormType = document.querySelector('#type');
+const roomsField = adForm.querySelector('#room_number');
+const capacityField = adForm.querySelector('#capacity');
+const priceField = adForm.querySelector('#price');
+
+
+const capacityOption = {
+  '1': ['1'],
+  '2': ['1', '2'],
+  '3': ['1', '2', '3'],
+  '100': ['0'],
+};
+
+const minPriceHouse = {
+  'bungalow': '0',
+  'flat': '1000',
+  'hotel': '3000',
+  'house': '5000',
+  'palace': '10000',
+};
 
 const pristine = new Pristine(adForm, {
   classTo: 'ad-form__element',
   errorClass: 'ad-form__element--invalid',
   errorTextParent: 'ad-form__element',
   errorTextClass: 'text-help',
-});
+}, true);
 
-const priceField = adForm.querySelector('#price');
-
-const minPriceHouse = {
-  'bungalow': 0,
-  'flat' : 1000,
-  'hotel' : 3000,
-  'house' : 5000,
-  'palace' : 10000,
-};
 
 const validatePrice = (value) => {
   const type = adForm.querySelector('#type');
@@ -34,17 +47,17 @@ const getPriceErrorMessage = () => {
 pristine.addValidator(priceField, validatePrice, getPriceErrorMessage);
 
 const onTypeChange = () => {
-  const type = adForm.querySelector('#type');
-  priceField.placeholder = minPriceHouse[this.value];
+  priceField.placeholder = minPriceHouse[adFormType.value];
   // pristine.validate(priceField);
-  priceField.min = minPriceHouse[type.value];
-  priceField.dataset.pristineMinMessage = `минимальное значение ${minPriceHouse[type.value]}`;
+  priceField.min = minPriceHouse[adFormType.value];
+  priceField.dataset.pristineMinMessage = `минимальная цена ${minPriceHouse[adFormType.value]}`;
 };
 
 adForm.querySelector('#type').addEventListener('change', onTypeChange);
 
+// Слайдер
+
 const sliderElement = document.querySelector('.ad-form__slider');
-const adFormType = document.querySelector('#type');
 
 const sliderElementConfig = {
   min: 0,
@@ -84,17 +97,6 @@ adFormType.addEventListener('change', ()=> {
 
 priceField.addEventListener('change', onTypeChange);
 
-
-const roomsField = adForm.querySelector('#room_number');
-const capacityField = adForm.querySelector('#capacity');
-
-const capacityOption = {
-  '1': ['1'],
-  '2': ['1', '2'],
-  '3': ['1', '2', '3'],
-  '100': ['0'],
-};
-
 const validateCapacity = () => capacityOption[roomsField.value].includes(capacityField.value);
 
 pristine.addValidator(roomsField, validateCapacity, 'Комнат недостаточно');
@@ -120,6 +122,7 @@ const onCheckoutChange = () => {
 checkinTime.addEventListener('change', onCheckinChange);
 checkoutTime.addEventListener('change', onCheckoutChange);
 
+// Валидация
 capacityField.addEventListener('change', () => {
   pristine.validate(capacityField);
   pristine.validate(roomsField);
@@ -130,23 +133,9 @@ roomsField.addEventListener('change', () => {
   pristine.validate(capacityField);
 });
 
-// adForm.addEventListener('submit', (evt) => {
-//   evt.preventDefault();
-
-//   const isValid = pristine.validate();
-//   if (isValid) {
-//     adForm.submit();
-//   } else {
-//     // eslint-disable-next-line no-console
-//     console.log('Неверное значение');
-//   }
-// });
-
-const submitBtn = adForm.querySelector('.ad-form__submit');
-
 const blockSubmitButton = () => {
   submitBtn.disabled = true;
-  submitBtn.textContent = 'Сохраняю...';
+  submitBtn.textContent = 'Сохранение';
 };
 
 const unblockSubmitButton = () => {
@@ -165,9 +154,13 @@ const resetForm = () => {
   sliderElement.noUiSlider.set(minPriceHouse[adFormType.value]);
 };
 
-resetBtn.addEventListener('click', resetForm);
+resetBtn.addEventListener('click', (evt)=> {
+  evt.preventDefault();
+  resetForm();
+  resetFilter();
+});
 
-const setUserFormSubmit = (onSuccess, onFail) => {
+const sendUserFormSubmit = (onSuccess, onFail) => {
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
@@ -189,4 +182,4 @@ const setUserFormSubmit = (onSuccess, onFail) => {
   });
 };
 
-export {setUserFormSubmit};
+export {sendUserFormSubmit};
