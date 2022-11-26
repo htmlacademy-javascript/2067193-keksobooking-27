@@ -5,10 +5,9 @@ const showAlert = (message) => {
 
   const errorPopup = document.querySelector('#error').content.querySelector('.error').cloneNode(true);
   const errorPopupMessage = errorPopup.querySelector('.error__message');
-  errorPopupMessage.textContent = message;
-
   const closeErrorButton = errorPopup.querySelector('.error__button');
 
+  errorPopupMessage.textContent = message;
   document.body.appendChild(errorPopup);
 
   closeErrorButton.addEventListener('click', () => {

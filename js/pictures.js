@@ -10,7 +10,6 @@ const previewPhoto = document.querySelector('.ad-form__photo');
 fileChooserAvatar.addEventListener('change', () => {
   const file = fileChooserAvatar.files[0];
   const fileName = file.name.toLowerCase();
-
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
 
   if (matches) {
@@ -23,9 +22,9 @@ fileChooserPhoto.addEventListener('change', () => {
   const file = fileChooserPhoto.files[0];
   const fileName = file.name.toLowerCase();
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  const imagesHouse = document.createElement('img');
 
   previewPhoto.innerHTML = '';
-  const imagesHouse = document.createElement('img');
   imagesHouse.alt = 'Фотография жилья';
   imagesHouse.style.maxWidth = '100%';
   imagesHouse.style.height = 'auto';

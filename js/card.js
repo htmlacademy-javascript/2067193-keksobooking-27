@@ -1,6 +1,9 @@
 const template = document.querySelector('#card').content;
 const popup = template.querySelector('.popup');
 
+const PHOTO_WIDTH = 45;
+const PHOTO_HEIGHT = 40;
+
 const housingType = {
   bungalow: 'Бунгало',
   flat: 'Квартира',
@@ -13,7 +16,6 @@ const renderFeatures = (items, element) => {
   element.innerHTML = '';
 
   const fragment = document.createDocumentFragment();
-
   items.forEach((item) => {
     const cardElement = document.createElement('li');
     cardElement.classList.add('popup__feature');
@@ -37,8 +39,8 @@ const renderPhotos = (items, elem) => {
       const element = document.createElement('img');
       element.classList.add('popup__photo');
       element.src = item;
-      element.width = 45;
-      element.height = 40;
+      element.width = PHOTO_WIDTH;
+      element.height = PHOTO_HEIGHT;
       element.alt = 'Фотография жилья';
       fragment.appendChild(element);
     });

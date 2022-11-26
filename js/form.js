@@ -1,9 +1,11 @@
 import './form-validator.js';
 
+const NUMBER_POINT = 5;
 const adForm = document.querySelector('.ad-form');
 const fieldset = adForm.querySelectorAll('fieldset');
 const adress = adForm.querySelector('#address');
-const NUMBER_POINT = 5;
+const MapFilters = document.querySelector('.map__filters');
+const select = MapFilters.querySelectorAll('select');
 
 const deactivatePage = () => {
   adForm.classList.add('ad-form--disabled');
@@ -11,9 +13,6 @@ const deactivatePage = () => {
     element.disabled = true;
   });
 };
-
-const MapFilters = document.querySelector('.map__filters');
-const select = MapFilters.querySelectorAll('select');
 
 const deactivateMapFilters = () => {
   MapFilters.classList.add('map__filters--disabled');

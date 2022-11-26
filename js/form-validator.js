@@ -9,6 +9,14 @@ const adFormType = document.querySelector('#type');
 const roomsField = adForm.querySelector('#room_number');
 const capacityField = adForm.querySelector('#capacity');
 const priceField = adForm.querySelector('#price');
+const SLIDER_MIN = 0;
+const SLIDER_MAX = 100000;
+const SLIDER_START = 1000;
+const SLIDER_STEP = 1;
+const checkinTime = adForm.querySelector('#timein');
+const checkoutTime = adForm.querySelector('#timeout');
+const resetBtn = adForm.querySelector('.ad-form__reset');
+const sliderElement = document.querySelector('.ad-form__slider');
 
 
 const capacityOption = {
@@ -57,22 +65,14 @@ adForm.querySelector('#type').addEventListener('change', onTypeChange);
 
 // Слайдер
 
-const sliderElement = document.querySelector('.ad-form__slider');
-
-const sliderElementConfig = {
-  min: 0,
-  max: 100000,
-  start : priceField.placeholder,
-  step: 1,
-};
 
 noUiSlider.create(sliderElement, {
   range : {
-    min : sliderElementConfig.min,
-    max : sliderElementConfig.max,
+    min : SLIDER_MIN,
+    max : SLIDER_MAX,
   },
-  start : sliderElementConfig.start,
-  step: sliderElementConfig.step,
+  start : SLIDER_START,
+  step: SLIDER_STEP,
   connect: 'lower',
   format: {
     to: function (value) {
@@ -108,10 +108,6 @@ const onRoomsChange = () => pristine.validate(capacityField);
 roomsField.addEventListener('change', onRoomsChange);
 capacityField.addEventListener('change', onCapacityChange);
 
-
-const checkinTime = adForm.querySelector('#timein');
-const checkoutTime = adForm.querySelector('#timeout');
-
 const onCheckinChange = () => {
   checkoutTime.value = checkinTime.value;
 };
@@ -143,7 +139,6 @@ const unblockSubmitButton = () => {
   submitBtn.textContent = 'Сохранить';
 };
 
-const resetBtn = adForm.querySelector('.ad-form__reset');
 const resetForm = () => {
   pristine.reset();
   adForm.reset();
@@ -163,7 +158,6 @@ resetBtn.addEventListener('click', (evt)=> {
 const sendUserFormSubmit = (onSuccess, onFail) => {
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-
     const isValid = pristine.validate();
     if (isValid) {
       blockSubmitButton();
