@@ -1,4 +1,5 @@
-import {deactivatePage, deactivateMapFilters, activatePage, activateMapFilters, setAddress} from './form.js';
+// import {deactivatePage, deactivateMapFilters, activatePage, activateMapFilters, setAddress} from './form.js';
+import {deactivatePage, activatePage, setAddress} from './form.js';
 import {initMap, setOnMapLoad, setOnMainPinMove, setAdPins, startCoordinate} from './map.js';
 import {getData} from './api.js';
 import {sendUserFormSubmit} from './form-validator.js';
@@ -12,11 +13,17 @@ setOnMapLoad(()=> {
   setOnMainPinMove(setAddress);
   setAddress(startCoordinate);
   activatePage();
-  activateMapFilters();
 });
 
+// setOnMapLoad(()=> {
+//   setOnMainPinMove(setAddress);
+//   setAddress(startCoordinate);
+//   activatePage();
+//   activateMapFilters();
+// });
+
 deactivatePage();
-deactivateMapFilters();
+// deactivateMapFilters();
 initMap(startCoordinate);
 
 sendUserFormSubmit(showSuccess, showAlert);

@@ -100,4 +100,4 @@ const setChangeEventOnFilter = (cb) => {
   }));
 };
 
-export {resetFilter, setChangeEventOnFilter, getFilterOffers };
+export {resetFilter, setChangeEventOnFilter, getFilterOffers};
