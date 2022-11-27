@@ -1,9 +1,11 @@
-const getData = (onSuccess, onFail) => {
+const GET_DATA_URL = 'https://27.javascript.pages.academy/keksobooking/data';
+const SEND_DATA_URL = 'https://27.javascript.pages.academy/keksobooking';
 
-  fetch('https://27.javascript.pages.academy/keksobooking/data')
+const getData = (onSuccess, onFail) => {
+  fetch(GET_DATA_URL)
     .then((response) => response.json())
-    .then((cards) => {
-      onSuccess(cards);
+    .then((offers) => {
+      onSuccess(offers);
     })
     .catch(() => {
       onFail('Не удалось получить данные');
@@ -11,10 +13,8 @@ const getData = (onSuccess, onFail) => {
 };
 
 const sendData = (onSuccess, onFail, body) => {
-
   fetch(
-    'https://27.javascript.pages.academy/keksobooking',
-    {
+    SEND_DATA_URL, {
       method: 'POST',
       body,
     },
