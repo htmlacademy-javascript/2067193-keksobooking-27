@@ -2,7 +2,6 @@ import {isEscEvent} from './util.js';
 import {resetFilter} from './filters.js';
 
 const showAlert = (message) => {
-
   const errorPopup = document.querySelector('#error').content.querySelector('.error').cloneNode(true);
   const errorPopupMessage = errorPopup.querySelector('.error__message');
   const closeErrorButton = errorPopup.querySelector('.error__button');
@@ -24,11 +23,9 @@ const showAlert = (message) => {
   document.addEventListener('click', () => {
     errorPopup.remove();
   });
-
 };
 
 const showSuccess = () => {
-
   const successPopup = document.querySelector('#success').content.querySelector('.success').cloneNode(true);
 
   document.body.appendChild(successPopup);
@@ -45,36 +42,32 @@ const showSuccess = () => {
   document.addEventListener('click', () => {
     successPopup.remove();
   });
-
 };
 
 const showError = (message) => {
-  const alertContainer = document.createElement('div');
-  alertContainer.style.zIndex = '100';
-  alertContainer.style.position = 'absolute';
-  alertContainer.style.left = '0';
-  alertContainer.style.top = '0';
-  alertContainer.style.right = '0';
-  alertContainer.style.padding = '10px 3px';
-  alertContainer.style.fontSize = '30px';
-  alertContainer.style.textAlign = 'center';
-  alertContainer.style.backgroundColor = 'red';
+  const errorWarning = document.createElement('div');
+  errorWarning.style.zIndex = '100';
+  errorWarning.style.position = 'absolute';
+  errorWarning.style.left = '0';
+  errorWarning.style.top = '0';
+  errorWarning.style.right = '0';
+  errorWarning.style.padding = '10px 3px';
+  errorWarning.style.fontSize = '30px';
+  errorWarning.style.textAlign = 'center';
+  errorWarning.style.backgroundColor = 'red';
+  errorWarning.textContent = message;
 
-  alertContainer.textContent = message;
-
-  document.body.append(alertContainer);
-
+  document.body.append(errorWarning);
   document.addEventListener('keydown', (evt) => {
     if (isEscEvent(evt)) {
       evt.preventDefault();
-      alertContainer.remove();
+      errorWarning.remove();
     }
   });
 
   document.addEventListener('click', () => {
-    alertContainer.remove();
+    errorWarning.remove();
   });
-
 };
 
 export {showAlert, showSuccess, showError};

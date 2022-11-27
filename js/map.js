@@ -1,20 +1,17 @@
 import {createCardElement} from './card.js';
-// import {activatePage, deactivatePage } from './form.js';
-// deactivatePage();
 
 const OFFERS_COUNT = 10;
 const MAIN_AD_PIN_ICON_URL = 'img/main-pin.svg';
 const MAIN_PIN_ICON_SIZE = 52;
 const AD_PIN_ICON_URL = 'img/pin.svg';
 const AD_PIN_ICON_SIZE = 40;
+const map = L.map('map-canvas');
+const markerGroup = L.layerGroup().addTo(map);
 
 const startCoordinate = {
   lat: 35.66023,
   lng: 139.73007,
 };
-
-const map = L.map('map-canvas');
-const markerGroup = L.layerGroup().addTo(map);
 
 const mainPinIcon = L.icon({
   iconUrl: MAIN_AD_PIN_ICON_URL,
@@ -64,7 +61,6 @@ const createAdPinMarkers = (offers) => {
         icon: adPinIcon,
       }
     );
-
     marker.addTo(markerGroup).bindPopup(createCardElement(offer));
   });
 };

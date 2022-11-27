@@ -18,7 +18,6 @@ const checkoutTime = adForm.querySelector('#timeout');
 const resetBtn = adForm.querySelector('.ad-form__reset');
 const sliderElement = document.querySelector('.ad-form__slider');
 
-
 const capacityOption = {
   '1': ['1'],
   '2': ['1', '2'],
@@ -41,7 +40,6 @@ const pristine = new Pristine(adForm, {
   errorTextClass: 'text-help',
 }, true);
 
-
 const validatePrice = (value) => {
   const type = adForm.querySelector('#type');
   return parseInt(value, 10) >= minPriceHouse[type.value];
@@ -56,7 +54,6 @@ pristine.addValidator(priceField, validatePrice, getPriceErrorMessage);
 
 const onTypeChange = () => {
   priceField.placeholder = minPriceHouse[adFormType.value];
-  // pristine.validate(priceField);
   priceField.min = minPriceHouse[adFormType.value];
   priceField.dataset.pristineMinMessage = `минимальная цена ${minPriceHouse[adFormType.value]}`;
 };
@@ -64,8 +61,6 @@ const onTypeChange = () => {
 adForm.querySelector('#type').addEventListener('change', onTypeChange);
 
 // Слайдер
-
-
 noUiSlider.create(sliderElement, {
   range : {
     min : SLIDER_MIN,
