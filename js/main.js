@@ -1,4 +1,3 @@
-// import {deactivatePage, deactivateMapFilters, activatePage, activateMapFilters, setAddress} from './form.js';
 import {deactivatePage, activatePage, setAddress} from './form.js';
 import {initMap, setOnMapLoad, setOnMainPinMove, setAdPins, startCoordinate} from './map.js';
 import {getData} from './api.js';
@@ -8,22 +7,13 @@ import {setChangeEventOnFilter, getFilterOffers } from './filters.js';
 import {debounce} from './util.js';
 import './pictures.js';
 
-
 setOnMapLoad(()=> {
   setOnMainPinMove(setAddress);
   setAddress(startCoordinate);
   activatePage();
 });
 
-// setOnMapLoad(()=> {
-//   setOnMainPinMove(setAddress);
-//   setAddress(startCoordinate);
-//   activatePage();
-//   activateMapFilters();
-// });
-
 deactivatePage();
-// deactivateMapFilters();
 initMap(startCoordinate);
 
 sendUserFormSubmit(showSuccess, showAlert);
@@ -33,7 +23,6 @@ getData((offers) => {
   setChangeEventOnFilter(
     debounce(() => {
       setAdPins(getFilterOffers(offers));
-      // setAdPins(offers.filter(getFilterOffers));
     })
   );
 }, () => {

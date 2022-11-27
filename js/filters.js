@@ -5,7 +5,6 @@ const PRICE_VALUE = {
 };
 
 const SIMILAR_AD_COUNT = 10;
-
 const filterTypeField = document.querySelector('#housing-type');
 const filterPriceField = document.querySelector('#housing-price');
 const filterRoomsField = document.querySelector('#housing-rooms');
@@ -57,7 +56,6 @@ const getFilterFeatures = (ad) => Array.from(features)
 //
 
 const getFilterOffers = (ads) => {
-
   const filteredData = [];
   for (let i = 0; i < ads.length; i++) {
     const ad = ads[i];
