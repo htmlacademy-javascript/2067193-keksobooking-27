@@ -1,6 +1,5 @@
 import {createCardElement} from './card.js';
 // import {activatePage, deactivatePage } from './form.js';
-
 // deactivatePage();
 
 const OFFERS_COUNT = 10;
